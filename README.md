@@ -11,7 +11,7 @@ Example:\
 `"{'Breed':'siamese'}"`
 
 Sample result:\
-![image](https://github.com/user-attachments/assets/14e6f0c8-2de9-49ab-9b37-7f0c70cb14ab)
+![image](https://github.com/user-attachments/assets/0dfb1089-192c-4ade-8786-acbb97472be7)
 
 To automate scraping, I used Task Scheduler.
 
