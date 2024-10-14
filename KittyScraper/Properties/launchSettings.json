@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "KittyScraper": {
+      "commandName": "Project",
+      "commandLineArgs": "\"{'Breed': 'siamese'}\""
+    }
+  }
+}
