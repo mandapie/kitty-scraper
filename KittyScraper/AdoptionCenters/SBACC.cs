@@ -35,6 +35,7 @@ namespace KittyScraper.AdoptionCenters
                 {
                     var cat = new Cat
                     {
+                        UrlLink = c.Children[0].Children[0].Children[1].Children[0].Children[0].GetAttribute("href"),
                         Name = c.Children[0].Children[0].Children[1].Children[0].Children[0].TextContent,
                         ImgUrl = c.Children[0].Children[0].Children[0].Children[0].Children[0].GetAttribute("src")?.ToString(),
                         Sex = c.Children[0].Children[0].Children[1].Children[1].TextContent.Split(": ")[1].Replace("\n", "").Trim(),

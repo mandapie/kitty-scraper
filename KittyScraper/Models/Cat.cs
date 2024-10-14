@@ -12,6 +12,7 @@
         public string? Weight { get; set; }
         public string? ImgUrl { get; set; }
         public string? Location { get; set; }
+        public string? UrlLink { get; set; }
         public string? Description { get; set; }
         public List<string>? Attributes { get; set; } //Good with children, dogs, vaccine up to date, etc
     }

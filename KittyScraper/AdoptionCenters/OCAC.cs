@@ -24,6 +24,7 @@ namespace KittyScraper.AdoptionCenters
 
                 var cat = new Cat()
                 {
+                    UrlLink = "https://petadoption.ocpetinfo.com/Adopt/#/list/CAT",
                     ImgUrl = $"https://petadoption.ocpetinfo.com/Adopt/{await c.QuerySelectorAsync("img").EvaluateFunctionAsync<string>("el => el.getAttribute('src')")}",
                     Name = await c.QuerySelectorAsync("h3").EvaluateFunctionAsync<string>("el => el.innerText"),
                     Id = details[0].Split(": ")[1],

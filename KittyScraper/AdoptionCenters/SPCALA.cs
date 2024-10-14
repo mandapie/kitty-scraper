@@ -21,6 +21,7 @@ namespace KittyScraper.AdoptionCenters
             {
                 var cat = new Cat
                 {
+                    UrlLink = $"https://spcala.com/adoptable/{c.Children[0].GetAttribute("href")}",
                     Name = c.Children[0].TextContent,
                     ImgUrl = c.Children[0].Children[0].GetAttribute("src")?.ToString(),
                     Breed = c.Children[1].InnerHtml.Split("<br>")[0],
