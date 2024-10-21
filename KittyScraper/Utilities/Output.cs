@@ -28,13 +28,12 @@ namespace KittyScraper.Utilities
 		}
 
 		//source: https://gist.github.com/lot224/e6e0398c2c62a334168a63f09ffff2bc
-		public static void SendDiscordWebhook(Cat obj)
+		public static void SendToWebhook(Cat obj, string webhookToken)
 		{
-            var webhook = Config.AppSettings.GetSection("webhookToken").Value;
-			var client = new HttpClient();
-			var message = new StringBuilder();
+            var client = new HttpClient();
+            var message = new StringBuilder();
 
-			Type t = obj.GetType();
+            Type t = obj.GetType();
 			PropertyInfo[] pi = t.GetProperties();
 			foreach (PropertyInfo p in pi)
 			{
@@ -57,12 +56,11 @@ namespace KittyScraper.Utilities
 			};
 
 			var webhookContentJson = new StringContent(JsonConvert.SerializeObject(WebhookContent), Encoding.UTF8, "application/json");
-			client.PostAsync(webhook, webhookContentJson).Wait();
+			client.PostAsync(webhookToken, webhookContentJson).Wait();
 		}
 
-		public static void SendDiscordWebhook(Exception ex)
+		public static void SendToWebhook(Exception ex, string webhookToken)
 		{
-            var webhook = Config.AppSettings.GetSection("webhookToken").Value;
             var client = new HttpClient();
 
 			var WebhookContent = new
@@ -71,7 +69,7 @@ namespace KittyScraper.Utilities
 			};
 
 			var webhookContentJson = new StringContent(JsonConvert.SerializeObject(WebhookContent), Encoding.UTF8, "application/json");
-			client.PostAsync(webhook, webhookContentJson).Wait();
+			client.PostAsync(webhookToken, webhookContentJson).Wait();
 		}
 	}
 }

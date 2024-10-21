@@ -4,6 +4,7 @@ using KittyScraper.Models;
 using KittyScraper.Utilities;
 using Newtonsoft.Json;
 using PuppeteerSharp;
+using System.Text;
 
 namespace KittyScraper
 {
@@ -39,7 +40,7 @@ namespace KittyScraper
                 await browserFetcher.DownloadAsync();
 
                 var browser = await Puppeteer.LaunchAsync(new LaunchOptions { Headless = true });
-                var page = await browser.NewPageAsync();                
+                var page = await browser.NewPageAsync();
 
                 //search criteria
                 Cat? searchCat = null;
@@ -61,6 +62,8 @@ namespace KittyScraper
                 var oCACCats = await oCAC.SearchCat(searchCat);
                 catResults.AddRange(oCACCats);
 
+                var webhookToken = Config.AppSettings.GetSection("webhookToken").Value;
+
                 //output result
                 foreach (var cat in catResults)
                 {
@@ -69,15 +72,28 @@ namespace KittyScraper
                     Console.WriteLine();
 
                     //send to discord
-                    Output.SendDiscordWebhook(cat);
+                    if (!string.IsNullOrWhiteSpace(webhookToken))
+                    {
+                        Output.SendToWebhook(cat, webhookToken);
+                    }
                 }
 
                 Console.WriteLine("Scrape done!");
+
+                if (string.IsNullOrWhiteSpace(webhookToken))
+                {
+                    Console.ReadKey();
+                }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
-                Output.SendDiscordWebhook(ex);
+
+                var webhookToken = Config.AppSettings.GetSection("webhookToken").Value;
+                if (!string.IsNullOrWhiteSpace(webhookToken))
+                {
+                    Output.SendToWebhook(ex, webhookToken);
+                }
             }
         }
     }
