@@ -4,6 +4,7 @@ I don't like the way PetFinder and AdoptAPet sites work. I only want to look for
 I set up a webhook to send a discord notification to a text channel when a cat I'm looking for is on a site.
 
 To run the project, simply run the console app.\
+Before you run, modify the appsettings.json file to include your webhook or leave it empty if you have none. The console app will stay open if there is no webhook.\
 Running with no arguments will scrape all cats.\
 To search for cats, the argument is entered in the form of a JSON string.\
 You can enter any criteria as long as it matches the `Cat` model from the project.\
